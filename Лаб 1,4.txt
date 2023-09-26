@@ -1,0 +1,32 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+// функция для добавления блока элементов в конец массива
+void appendBlock(vector<int>& array, const vector<int>& block) {
+    array.insert(array.end(), block.begin(), block.end());
+}
+
+int main() {
+    vector<int> a = {1, 2, 3};
+    vector<int> b = {4, 5, 6};
+
+    // вывод исходного массива
+    cout << "исходный массив: ";
+    for (int num : a) {
+        cout << num << " ";
+    }
+    cout << endl;
+
+    // добавление блока элементов в конец массива
+    appendBlock(a, b);
+
+   
+    cout << "массив после добавления блока: ";
+    for (int num : a) {
+        cout << num << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
