@@ -1,0 +1,68 @@
+#include <iostream>
+using namespace std;
+
+class MyLinkedList {
+public:
+    struct Node {
+        int val;        // значение узла
+        Node* next;     // указатель на следующий узел
+        Node(int x) : val(x), next(nullptr) {}  // конструктор узла
+    };
+
+    Node* head;  // указатель на голову списка
+
+    MyLinkedList() : head(nullptr) {}  // конструктор класса
+
+    // метод для добавления элемента в начало списка
+    void addAtHead(int val) {
+        Node* newNode = new Node(val);    // создание нового узла
+        newNode->next = head;            // новый узел указывает на текущую голову
+        head = newNode;                  // обновление головы списка
+    }
+
+    // функция для вывода содержимого списка через пробел
+    void print() {
+        Node* current = head;            // начинаем с головы списка
+        while (current != nullptr) {     // проходим по всем узлам
+            cout << current->val << " "; // выводим значение текущего узла
+            current = current->next;     // переходим к следующему узлу
+        }
+        cout << endl;
+    }
+
+    // метод для переворота связного списка
+    void reverse() {
+        Node* prev = nullptr;           // указатель на предыдущий узел
+        Node* current = head;           // указатель на текущий узел
+        Node* next = nullptr;           // указатель на следующий узел
+
+        while (current != nullptr) {    // проходим по всем узлам
+            next = current->next;       // сохраняем указатель на следующий узел
+            current->next = prev;       // переворачиваем указатель на следующий узел
+
+            // перемещаем указатели для следующей итерации
+            prev = current;
+            current = next;
+        }
+
+        head = prev;  // новая голова списка - последний элемент (бывший хвост)
+    }
+};
+
+int main() {
+    MyLinkedList list;
+
+    list.addAtHead(3);
+    list.addAtHead(2);
+    list.addAtHead(1);
+
+    cout << "содержимое списка (до переворота): ";
+    list.print();
+
+    list.reverse();
+
+    cout << "содержимое списка (после переворота): ";
+    list.print();
+
+    return 0;
+}
