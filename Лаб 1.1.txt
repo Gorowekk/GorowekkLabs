@@ -1,44 +1,41 @@
 #include <iostream>
-#include <vector>
 #include <algorithm>
 using namespace std;
+
 int main() {
     int M, N;
-    // ввод размеров
-    cout << " размер A: ";
+    
+    cout << "размер A: ";
     cin >> M;
-    cout << " размер B: ";
+    cout << "размер B: ";
     cin >> N;
 
-    // создание массивов A и B
-    vector<int> A(M);
-    vector<int> B(N);
+    int A[M], B[N];
 
-    // ввод  A
-    cout << " элементы массива A:" << endl;
+    cout << "элементы массива A:" << endl;
     for (int i = 0; i < M; ++i) {
         cin >> A[i];
     }
-    // ввод  B
-    cout << " элементы массива B:" << endl;
+    
+    cout << "элементы массива B:" << endl;
     for (int i = 0; i < N; ++i) {
         cin >> B[i];
     }
-    // сортировка массивов 
-    sort(A.begin(), A.end());
-    sort(B.begin(), B.end());
 
-    // создание третьего массива для общих элементов
-    vector<int> C;
-
-    // set_intersection для нахождения общих элементов
-    set_intersection(A.begin(), A.end(), B.begin(), B.end(), back_inserter(C));
-
-    
-    cout << " общие элементы:" << endl;
-    for (int num : C) {
-        cout << num << " ";
+   cout << "общие элементы:" << endl;
+    int i = 0, j = 0;
+    while (i < M && j < N) {
+        if (A[i] == B[j]) {
+            cout << A[i] << " ";
+            ++i;
+            ++j;
+        } else if (A[i] < B[j]) {
+            ++i;
+        } else {
+            ++j;
+        }
     }
     cout << endl;
+
     return 0;
 }
