@@ -1,32 +1,31 @@
 #include <iostream>
-#include <vector>
-
 using namespace std;
 
 // функция для удаления блока элементов из массива, начиная с указанного индекса
-void removeBlock(vector<int>& array, int index, int blockSize) {
-    if (index >= 0 && index < array.size() && blockSize > 0) {
-        array.erase(array.begin() + index, array.begin() + index + blockSize);
+void removeBlock(int a[], int& size_a, int index, int b) {
+    if (index >= 0 && index < size_a && b > 0) {
+        for (int i = index + b; i < size_a; ++i) {
+            a[i - b] = a[i];
+        }
+        size_a -= b;
     }
 }
 
 int main() {
-    vector<int> a = {1, 2, 3, 4, 5, 6};
+    int a[6] = {1, 2, 3, 4, 5, 6};
+    int size_a = 6;
 
-    // исходный массив
     cout << "исходный массив: ";
-    for (int num : a) {
-        cout << num << " ";
+    for (int i = 0; i < size_a; ++i) {
+        cout << a[i] << " ";
     }
     cout << endl;
 
-    // удаление блока элементов начиная с индекса 2 и размером 3
-    removeBlock(a, 2, 3);
+    removeBlock(a, size_a, 2, 3);
 
-    // массив после удаления блока
     cout << "массив после удаления блока: ";
-    for (int num : a) {
-        cout << num << " ";
+    for (int i = 0; i < size_a; ++i) {
+        cout << a[i] << " ";
     }
     cout << endl;
 
