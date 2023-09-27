@@ -1,49 +1,66 @@
 #include <iostream>
-#include <vector>
 #include <algorithm>
 using namespace std;
 
 int main() {
     int M, N;
     
-    // ввод размеров
-    cout << "размер массива A: ";
+    cout << "размер A: ";
     cin >> M;
-    cout << "размер массива B: ";
+    cout << "размер B: ";
     cin >> N;
 
-    // создание массивов A и B
-    vector<int> A(M);
-    vector<int> B(N);
-
-    // ввод элементов массива A
+    int A[M];
     cout << "элементы массива A:" << endl;
     for (int i = 0; i < M; ++i) {
         cin >> A[i];
     }
 
-    // ввод элементов массива B
+    int B[N];
     cout << "элементы массива B:" << endl;
     for (int i = 0; i < N; ++i) {
         cin >> B[i];
     }
 
-    // сортировка массивов A и B
-    sort(A.begin(), A.end());
-    sort(B.begin(), B.end());
-
-    // массив для хранения 
-    vector<int> C;
-
-    // set_difference для нахождения элементов
-    set_difference(A.begin(), A.end(), B.begin(), B.end(), back_inserter(C));
-
-    
     cout << "элементы из массива A, которых нет в массиве B:" << endl;
-    for (int num : C) {
-        cout << num << " ";
+    int i = 0, j = 0;
+    while (i < M && j < N) {
+        if (A[i] < B[j]) {
+            cout << A[i] << " ";
+            ++i;
+        } else if (A[i] == B[j]) {
+            ++i;
+            ++j;
+        } else {
+            ++j;
+        }
+    }
+    while (i < M) {
+        cout << A[i] << " ";
+        ++i;
+    }
+    cout << endl;
+
+    cout << "элементы из массива B, которых нет в массиве A:" << endl;
+    i = 0;
+    j = 0;
+    while (i < N && j < M) {
+        if (B[i] < A[j]) {
+            cout << B[i] << " ";
+            ++i;
+        } else if (B[i] == A[j]) {
+            ++i;
+            ++j;
+        } else {
+            ++j;
+        }
+    }
+    while (i < N) {
+        cout << B[i] << " ";
+        ++i;
     }
     cout << endl;
 
     return 0;
 }
+
