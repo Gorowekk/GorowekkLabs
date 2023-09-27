@@ -1,5 +1,4 @@
 #include <iostream>
-#include <vector>
 #include <algorithm>
 
 using namespace std;
@@ -7,41 +6,52 @@ using namespace std;
 int main() {
     int M, N;
 
-    // ввод размеров
     cout << "введите размер массива A: ";
     cin >> M;
     cout << "введите размер массива B: ";
     cin >> N;
 
-    // создание массивов A и B
-    vector<int> A(M);
-    vector<int> B(N);
+    int A[M];
+    int B[N];
 
-    // ввод элементов массива A
     cout << "введите элементы массива A:" << endl;
     for (int i = 0; i < M; ++i) {
         cin >> A[i];
     }
 
-    // ввод элементов массива B
     cout << "введите элементы массива B:" << endl;
     for (int i = 0; i < N; ++i) {
         cin >> B[i];
     }
-    // создание третьего массива для хранения элементов, которые не являются общими
-    vector<int> C;
 
-    // set_difference для нахождения элементов 
-    set_difference(A.begin(), A.end(), B.begin(), B.end(), back_inserter(C));
-
-    // set_difference для нахождения элементов
-    set_difference(B.begin(), B.end(), A.begin(), A.end(), back_inserter(C));
-
+    cout << "элементы, которые не являются общими:" << endl;
     
-    cout << "элементы, которые не являются общими для массивов A и B:" << endl;
-    for (int num : C) {
-        cout << num << " ";
+    for (int i = 0; i < M; ++i) {
+        bool found = false;
+        for (int j = 0; j < N; ++j) {
+            if (A[i] == B[j]) {
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            cout << A[i] << " ";
+        }
     }
+
+    for (int i = 0; i < N; ++i) {
+        bool found = false;
+        for (int j = 0; j < M; ++j) {
+            if (B[i] == A[j]) {
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            cout << B[i] << " ";
+        }
+    }
+
     cout << endl;
 
     return 0;
